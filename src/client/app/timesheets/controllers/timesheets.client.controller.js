@@ -9,14 +9,14 @@
         '$stateParams',
         '$location',
         'Timesheet',
-        'TableSettings',
+        'TableSettings', 'Project', 'Activity',
         'TimesheetForm'];
     /* @ngInject */
     function TimesheetController(logger,
         $stateParams,
         $location,
         Timesheet,
-        TableSettings,
+        TableSettings, Project, Activity,
         TimesheetForm,
         alert) {
 
@@ -80,77 +80,11 @@
             Timesheet.query(function(sheet) {
                 angular.forEach(sheet, function(p) {
                     console.log(p);
-                    p["startsAt"] = p.date;
                     vm.events.push(p)
                 })
             });
         };
-        // vm.tableParams = TableSettings.getParams(Timesheet);
-        // vm.timesheet = {};
-        //
-        // vm.setFormFields = function(disabled) {
-        //     vm.formFields = TimesheetForm.getFormFields(disabled);
-        // };
-        //
-        // vm.create = function() {
-        //     // Create new Timesheet object
-        //     var timesheet = new Timesheet(vm.timesheet);
-        //
-        //     // Redirect after save
-        //     timesheet.$save(function(response) {
-        //         logger.success('Timesheet created');
-        //         $location.path('timesheets/' + response.id);
-        //     }, function(errorResponse) {
-        //         vm.error = errorResponse.data.summary;
-        //     });
-        // };
-        //
-        // // Remove existing Timesheet
-        // vm.remove = function(timesheet) {
-        //
-        //     if (timesheet) {
-        //         timesheet = Timesheet.get({timesheetId:timesheet.id}, function() {
-        //             timesheet.$remove(function() {
-        //                 logger.success('Timesheet deleted');
-        //                 vm.tableParams.reload();
-        //             });
-        //         });
-        //     } else {
-        //         vm.timesheet.$remove(function() {
-        //             logger.success('Timesheet deleted');
-        //             $location.path('/timesheets');
-        //         });
-        //     }
-        //
-        // };
-        //
-        // // Update existing Timesheet
-        // vm.update = function() {
-        //     var timesheet = vm.timesheet;
-        //
-        //     timesheet.$update(function() {
-        //         logger.success('Timesheet updated');
-        //         $location.path('timesheets/' + timesheet.id);
-        //     }, function(errorResponse) {
-        //         vm.error = errorResponse.data.summary;
-        //     });
-        // };
-        //
-        // vm.toViewTimesheet = function() {
-        //     vm.timesheet = Timesheet.get({timesheetId: $stateParams.timesheetId});
-        //     vm.setFormFields(true);
-        // };
-        //
-        // vm.toEditTimesheet = function() {
-        //     vm.timesheet = Timesheet.get({timesheetId: $stateParams.timesheetId});
-        //     vm.setFormFields(false);
-        // };
-        //
-        // activate();
-        //
-        // function activate() {
-        //     //logger.info('Activated Timesheet View');
-        // }
+
         vm.choices = [{id: 'choice1'}];
 
         vm.addNewChoice = function() {
@@ -163,8 +97,25 @@
             vm.choices.splice(lastItem);
         };
 
-        // Append the html tags to the week bar
+        // populates the projects drop down
+        vm.projects = [];
+        (function() {
+            Project.query(function(project) {
+                angular.forEach(project, function(p) {
+                    vm.projects.push(p);
+                })
+            })
+        }());
 
+        // populates the activities drop down
+        vm.activities = [];
+        (function() {
+            Activity.query(function(activity) {
+                angular.forEach(activity, function(p) {
+                    vm.activities.push(p);
+                });
+            });
+        }());
     }
 
 })();

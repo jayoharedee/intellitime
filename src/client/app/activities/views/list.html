@@ -1,0 +1,37 @@
+<section class="mainbar" data-ng-init="vm.getActivities()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Activity List
+    </div>
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" href="/activities/create">
+          <i class="glyphicon glyphicon-open"></i> New Activity
+        </a>
+      </div>
+
+      <table class="table table-condensed table-striped">
+          <tr ng-repeat="activity in vm.activities">
+              <td data-title="'Activity Name'" sortable="'activityName'" filter="{ 'activityName': 'text' }">{{activity.activityName}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/activities/{{activity.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" href="/activities/{{activity.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(activity)" item="activity">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

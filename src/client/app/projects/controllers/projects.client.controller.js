@@ -31,8 +31,9 @@
             // Create new Project object
             var project = new Project(vm.project);
             // Redirect after save
+
+
             project.$save(function(response) {
-                console.log(vm.project)
                 logger.success('Project created');
                 $location.path('projects/' + response.id);
             }, function(errorResponse) {

@@ -2,15 +2,15 @@
     'use strict';
 
     angular
-        .module('app.project')
-        .factory('Project', Project);
+        .module('app.activity')
+        .factory('Activity', Activity);
 
-    Project.$inject = ['$resource', 'API_BASE_URL'];
+    Activity.$inject = ['$resource', 'API_BASE_URL'];
     /* @ngInject */
-    function Project($resource, API_BASE_URL) {
+    function Activity($resource, API_BASE_URL) {
 
         var params = {
-            projectId: '@id'
+            activityId: '@id'
         };
 
         var actions = {
@@ -20,7 +20,7 @@
             }
         };
 
-        var API_URL = API_BASE_URL + '/projects/:projectId';
+        var API_URL = API_BASE_URL + '/activities/:activityId';
 
         return $resource(API_URL, params, actions);
 

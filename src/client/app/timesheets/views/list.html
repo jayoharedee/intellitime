@@ -43,23 +43,7 @@
 
                 <br>
 
-                <mwl-calendar
-                    events="vm.events"
-                    view="vm.calendarView"
-                    view-title="vm.calendarTitle"
-                    view-date="vm.viewDate"
-                    on-event-click="vm.eventClicked(calendarEvent)"
-                    on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
-                    edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
-                    delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
-                    on-edit-event-click="vm.eventEdited(calendarEvent)"
-                    on-delete-event-click="vm.eventDeleted(calendarEvent)"
-                    cell-is-open="vm.isCellOpen"
-                    day-view-start="06:00"
-                    day-view-end="22:00"
-                    day-view-split="30"
-                    cell-modifier="vm.modifyCell(calendarCell)">
-                </mwl-calendar>
+
 
                 <br><br><br>
 
@@ -67,134 +51,49 @@
 
 
                 <script>
-                    //                $(function() {
-                    //                    var projectCell = document.createElement('div');
-                    //                    projectCell.className = 'cal-cell1 ng-scope cal-day-weekdend cal-day-future';
-                    //                    var projectSpan = document.createElement('span');
-                    //                    projectSpan.className = 'ng-binding';
-                    //                    projectSpan.innerHTML = 'Project';
-                    //                    projectCell.appendChild(projectSpan);
-                    //
-                    //                    var taskCell = document.createElement('div');
-                    //                    taskCell.className = 'cal-cell1 ng-scope cal-day-weekdend cal-day-future';
-                    //                    var taskSpan = document.createElement('span');
-                    //                    taskSpan.className = 'ng-binding';
-                    //                    taskSpan.innerHTML = 'Task';
-                    //                    taskCell.appendChild(taskSpan);
-                    //
-                    //                    document.getElementsByClassName('cal-week-box')[0].appendChild(taskCell);
-                    //                    document.getElementsByClassName('cal-week-box')[0].appendChild(projectCell);
-                    //
-                    //                    console.log('test')
-                    //                })
+//                                    $(function() {
+//                                        var projectCell = document.createElement('div');
+//                                        projectCell.className = 'cal-cell1 ng-scope cal-day-weekdend cal-day-future';
+//                                        var projectSpan = document.createElement('span');
+//                                        projectSpan.className = 'ng-binding';
+//                                        projectSpan.innerHTML = 'Project';
+//                                        projectCell.appendChild(projectSpan);
+//
+//                                        var taskCell = document.createElement('div');
+//                                        taskCell.className = 'cal-cell1 ng-scope cal-day-weekdend cal-day-future';
+//                                        var taskSpan = document.createElement('span');
+//                                        taskSpan.className = 'ng-binding';
+//                                        taskSpan.innerHTML = 'Task';
+//                                        taskCell.appendChild(taskSpan);
+//
+//                                        //document.getElementsByClassName('cal-week-box')[0].appendChild(taskCell);
+//                                        //document.getElementsByClassName('cal-week-box')[0].appendChild(projectCell);
+//
+//                                        console.log('test')
+//                                    })
                 </script>
 
-
-
-
-                <!--<table class="table table-bordered">-->
-
-                <!--<thead>-->
-                <!--<tr>-->
-                <!--<th>Title</th>-->
-                <!--<th>Type</th>-->
-                <!--<th>Starts at</th>-->
-                <!--<th>Ends at</th>-->
-                <!--<th>Remove</th>-->
-                <!--</tr>-->
-                <!--</thead>-->
-
-                <!--<tbody>-->
-                <!--<tr ng-repeat="event in vm.events track by $index">-->
-                <!--<td>-->
-                <!--<input-->
-                <!--type="text"-->
-                <!--class="form-control"-->
-                <!--ng-model="event.title">-->
-                <!--</td>-->
-                <!--<td>-->
-                <!--<select ng-model="event.type" class="form-control">-->
-                <!--<option value="important">Important</option>-->
-                <!--<option value="warning">Warning</option>-->
-                <!--<option value="info">Info</option>-->
-                <!--<option value="inverse">Inverse</option>-->
-                <!--<option value="success">Success</option>-->
-                <!--<option value="special">Special</option>-->
-                <!--</select>-->
-                <!--</td>-->
-                <!--<td>-->
-                <!--<p class="input-group" style="max-width: 250px">-->
-                <!--<input-->
-                <!--type="text"-->
-                <!--class="form-control"-->
-                <!--readonly-->
-                <!--datepicker-popup="dd MMMM yyyy"-->
-                <!--ng-model="event.startsAt"-->
-                <!--is-open="event.startOpen"-->
-                <!--close-text="Close" >-->
-                <!--<span class="input-group-btn">-->
-                <!--<button-->
-                <!--type="button"-->
-                <!--class="btn btn-default"-->
-                <!--ng-click="vm.toggle($event, 'startOpen', event)">-->
-                <!--<i class="glyphicon glyphicon-calendar"></i>-->
-                <!--</button>-->
-                <!--</span>-->
-                <!--</p>-->
-                <!--<timepicker-->
-                <!--ng-model="event.startsAt"-->
-                <!--hour-step="1"-->
-                <!--minute-step="15"-->
-                <!--show-meridian="true">-->
-                <!--</timepicker>-->
-                <!--</td>-->
-                <!--<td>-->
-                <!--<p class="input-group" style="max-width: 250px">-->
-                <!--<input-->
-                <!--type="text"-->
-                <!--class="form-control"-->
-                <!--readonly-->
-                <!--datepicker-popup="dd MMMM yyyy"-->
-                <!--ng-model="event.endsAt"-->
-                <!--is-open="event.endOpen"-->
-                <!--close-text="Close">-->
-                <!--<span class="input-group-btn">-->
-                <!--<button-->
-                <!--type="button"-->
-                <!--class="btn btn-default"-->
-                <!--ng-click="vm.toggle($event, 'endOpen', event)">-->
-                <!--<i class="glyphicon glyphicon-calendar"></i>-->
-                <!--</button>-->
-                <!--</span>-->
-                <!--</p>-->
-                <!--<uib-timepicker-->
-                <!--ng-model="event.endsAt"-->
-                <!--hour-step="1"-->
-                <!--minute-step="15"-->
-                <!--show-meridian="true">-->
-                <!--</uib-timepicker>-->
-                <!--</td>-->
-                <!--<td>-->
-                <!--<button-->
-                <!--class="btn btn-danger"-->
-                <!--ng-click="vm.events.splice($index, 1)">-->
-                <!--Delete-->
-                <!--</button>-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-
-                <!--</table>-->
-
                 <div class="row">
+                    <mwl-calendar
+                        events="vm.events"
+                        view="vm.calendarView"
+                        view-title="vm.calendarTitle"
+                        view-date="vm.viewDate"
+                        on-event-click="vm.eventClicked(calendarEvent)"
+                        on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+                        edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+                        delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+                        on-edit-event-click="vm.eventEdited(calendarEvent)"
+                        on-delete-event-click="vm.eventDeleted(calendarEvent)"
+                        cell-is-open="vm.isCellOpen"
+                        day-view-start="06:00"
+                        day-view-end="22:00"
+                        day-view-split="30"
+                        cell-modifier="vm.modifyCell(calendarCell)">
+                    </mwl-calendar>
                     <fieldset  data-ng-repeat="choice in vm.choices">
-                        <div class="col-xs-1">
-                            <select>
-                                <option>Mobile</option>
-                                <option>Office</option>
-                                <option>Home</option>
-                            </select>
-                        </div>
+
+
                         <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
                         <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
                         <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
@@ -204,37 +103,54 @@
                         <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
                         <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
 
+                        <div class="col-xs-1">
+                            <input class="form-control" type="text">
+                        </div>
 
                         <div class="col-xs-1">
-                            <select>
-                                <option>Mobile</option>
-                                <option>Office</option>
-                                <option>Home</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-2">
-                            <label for="ex2">col-xs-2</label>
-                            <input class="form-control" id="ex2" type="text">
-                        </div>
-                        <div class="col-xs-2">
-                            <label for="ex3">col-xs-2</label>
                             <input class="form-control" id="ex3" type="text">
                         </div>
-                        <div class="col-xs-2">
-                            <label for="ex1">col-xs-2</label>
+
+
+                        <div class="col-xs-1">
+                            <input class="form-control" type="text">
+                        </div>
+
+                        <div class="col-xs-1">
+                            <input class="form-control" id="ex3" type="text">
+                        </div>
+
+                        <div class="col-xs-1">
                             <input class="form-control" id="ex1" type="text">
                         </div>
-                        <div class="col-xs-2">
-                            <label for="ex2">col-xs-2</label>
+
+                        <div class="col-xs-1">
                             <input class="form-control" id="ex2" type="text">
                         </div>
-                        <div class="col-xs-2">
-                            <label for="ex3">col-xs-2</label>
+
+                        <div class="col-xs-1">
                             <input class="form-control" id="ex3" type="text">
                         </div>
 
+                        <div class="col-xs-1">
+                            <select>
+                                <option
+                                    data-ng-repeat="project in vm.projects"
+                                    value="{{project.id}}">
+                                    {{project.name}}
+                                </option>
+                            </select>
+                        </div>
 
-
+                        <div class="col-xs-1">
+                            <select>
+                                <option
+                                    data-ng-repeat="activity in vm.activities"
+                                    value="{{activity.id}}">
+                                    {{activity.activityName}}
+                                </option>
+                            </select>
+                        </div>
 
 
                         <!--<button class="remove" ng-show="$last" ng-click="vm.removeChoice()">-</button>-->
