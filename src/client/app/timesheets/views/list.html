@@ -152,6 +152,16 @@
                             </select>
                         </div>
 
+                        <div class="col-xs-1">
+                            <select>
+                                <option
+                                    data-ng-repeat="user in vm.users"
+                                    value="{{user.id}}">
+                                    {{user.fullName}}
+                                </option>
+                            </select>
+                        </div>
+
 
                         <!--<button class="remove" ng-show="$last" ng-click="vm.removeChoice()">-</button>-->
                         <!--</fieldset>-->
@@ -176,6 +186,7 @@
 
                 </div>
                 <div class="row">
+
                     <div class="col-lg-2">
                         <h3 id="event-editor">
                             <button
@@ -196,6 +207,19 @@
                                 ng-click="vm.addNewChoice()">
                                 <!--ng-click="vm.events.push({title: 'New event', type: 'important', draggable: true, resizable: true})">-->
                                 Add new row
+                            </button>
+
+                            <div class="clearfix"></div>
+                        </h3>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <h3 id="event-editor1">
+                            <button
+                                class="btn btn-warning pull-right"
+                                ng-click="vm.submitTime()">
+                                <!--ng-click="vm.events.push({title: 'New event', type: 'important', draggable: true, resizable: true})">-->
+                                Submit Your Time Sheet
                             </button>
 
                             <div class="clearfix"></div>

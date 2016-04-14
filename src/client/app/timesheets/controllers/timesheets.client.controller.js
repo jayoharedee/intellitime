@@ -9,14 +9,14 @@
         '$stateParams',
         '$location',
         'Timesheet',
-        'TableSettings', 'Project', 'Activity',
+        'TableSettings', 'Project', 'Activity', 'User',
         'TimesheetForm'];
     /* @ngInject */
     function TimesheetController(logger,
         $stateParams,
         $location,
         Timesheet,
-        TableSettings, Project, Activity,
+        TableSettings, Project, Activity, User,
         TimesheetForm,
         alert) {
 
@@ -79,7 +79,6 @@
         vm.getTimeSheets = function() {
             Timesheet.query(function(sheet) {
                 angular.forEach(sheet, function(p) {
-                    console.log(p);
                     vm.events.push(p)
                 })
             });
@@ -96,7 +95,17 @@
             var lastItem = vm.choices.length-1;
             vm.choices.splice(lastItem);
         };
+        
+        vm.submitTime = function() {
+            Timesheet.save(function(response) {
+                logger.success('Budget created');
+                $location.path('timesheets/' + response.id);
+            }, function(errorResponse) {
+                vm.error = errorResponse.data.summary;
+            });
+        };
 
+        // obiously ADJUST these below because we don't want themr unning every time
         // populates the projects drop down
         vm.projects = [];
         (function() {
@@ -116,6 +125,17 @@
                 });
             });
         }());
+
+        // temporary fix for users
+        vm.users = [];
+        (function() {
+            User.query(function(user) {
+                angular.forEach(user, function(p) {
+                    vm.users.push(p)
+                })
+            });
+        }());
+
     }
 
 })();

@@ -1,0 +1,40 @@
+<section class="mainbar" data-ng-init="vm.getUsers()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      User List
+    </div>
+    <div class="panel-body">
+
+      <div class="pull-right">
+        <a type="button" class="btn btn-success" href="/users/create">
+          <i class="glyphicon glyphicon-open"></i> New User
+        </a>
+      </div>
+
+      <table show-filter="true" class="table table-condensed table-striped">
+          <tr ng-repeat="user in vm.users">
+              <td data-title="'Full Name'" sortable="'fullName'" filter="{ 'fullName': 'text' }">{{user.fullName}}</td>
+              <td data-title="'Address'" sortable="'address'" filter="{'address': 'text'}">{{user.userName}}</td>
+              <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">{{user.email}}</td>
+              <td data-title="'Address'" sortable="'address'" filter="{'address': 'text'}">{{user.title}}</td>
+              <td>
+                 <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/users/{{user.id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                      <a class="btn btn-default" title="Edit" href="/users/{{user.id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                      </a>
+                      <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(user)" item="user">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                      </a>
+                  </div>
+              </td>
+          </tr>
+      </table>
+
+    </div>
+  </div>
+
+</section>

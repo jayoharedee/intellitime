@@ -1,0 +1,65 @@
+<section class="mainbar" data-ng-init="vm.initBudget()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      New Budget
+    </div>
+    <div class="panel-body">
+
+      <form data-ng-submit="vm.create()" novalidate class="ng-pristine ng-valid">
+
+          <div class="col-xs-12">
+              <label class="control-label">Hours Allocated: </label>
+              <input class="form-control" id="ex3" type="text" ng-model="vm.budget.hours">
+          </div>
+
+          <div class="col-xs-12">
+              <label class="control-label">Fiscal Year: </label>
+              <select ng-model="vm.budget.fiscalYear" class="form-control">
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+              </select>
+          </div>
+
+          <div class="col-xs-12">
+              <label class="control-label">Project Name: </label>
+              <select class="form-control">
+                  <option
+                      data-ng-repeat="project in vm.projects"
+                      value="{{project.id}}">
+                      {{project.name}}
+                  </option>
+              </select>
+          </div>
+
+          <div class="col-xs-12">
+              <label class="control-label">Employee: </label>
+              <select ng-model="vm.budget.user_id" class="form-control">
+                  <option
+                      data-ng-repeat="user in vm.users"
+                      value="{{user.id}}">
+                      {{user.fullName}}
+                  </option>
+              </select>
+          </div>
+
+        <hr/>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" ng-disabled="vm.form.$invalid">
+              <i class="glyphicon glyphicon-ok"></i> Save
+            </button>
+            <a class="btn btn-danger" href="/budgets">
+              <i class="glyphicon glyphicon-remove"></i> Cancel
+            </a>
+        </div>
+
+        <div data-ng-show="vm.error" class="alert alert-danger form-group">
+          <strong data-ng-bind="vm.error"></strong>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</section>

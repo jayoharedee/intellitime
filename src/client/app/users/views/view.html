@@ -1,0 +1,47 @@
+<section class="mainbar" data-ng-init="vm.toViewUser()">
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+			User View
+    </div>
+    <div class="panel-body">
+
+      <form novalidate>
+          <div class="col-xs-12">
+              <label class="control-label">Full Name: </label>
+              <input class="form-control" id="ex3" type="text" ng-model="vm.user.fullName">
+          </div>
+
+          <div class="col-xs-12">
+              <label class="control-label">User Name: </label>
+              <input class="form-control" id="ex3" type="text" ng-model="vm.user.userName">
+          </div>
+
+          <div class="col-xs-12">
+              <label class="control-label">Email: </label>
+              <input class="form-control" id="ex3" type="text" ng-model="vm.user.email">
+          </div>
+
+          <div class="col-xs-12">
+              <label class="control-label">Title: </label>
+              <input class="form-control" id="ex3" type="text" ng-model="vm.user.title">
+          </div>
+      </form>
+
+      <hr/>
+      <div>
+        <a class="btn btn-success" href="/users/{{vm.user.id}}/edit">
+          <i class="glyphicon glyphicon-edit"></i> Edit
+        </a>
+        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove()" item="vm.user">
+          <i class="glyphicon glyphicon-remove-circle"></i> Delete
+        </a>
+        <a class="btn btn-primary" href="/users">
+          <i class="glyphicon glyphicon-list"></i> List Users
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</section>
