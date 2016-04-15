@@ -1,0 +1,50 @@
+<div class="cal-week-box">
+    <div class="cal-row-fluid cal-row-head">
+        <div class="cal-cell1 ng-scope cal-day-weekend cal-day-past">
+            <span class="ng-binding"></span>
+            <br>
+            <small>
+                <span class="pointer ng-binding">Project</span>
+            </small>
+            <br>
+                <select data-ng-repeat="choice in vm.choices"
+                        ng-model="vm.timesheet.project[$index]">
+                    <option
+                        data-ng-repeat="project in vm.projects"
+                        value="{{project.id}}">
+                        {{project.name}}
+                    </option>
+                </select>
+
+        </div>
+
+        <div class="cal-cell1 ng-scope cal-day-weekend cal-day-past">
+            <span class="ng-binding"></span>
+            <br>
+            <small>
+                <span class="pointer ng-binding">Activity</span>
+            </small>
+            <br>
+
+            <select data-ng-repeat="choice in vm.choices"
+                    ng-model="vm.timesheet.activity[$index]">
+                <option
+                    data-ng-repeat="activity in vm.activities"
+                    value="{{activity.id}}">
+                    {{activity.activityName}}
+                </option>
+            </select>
+        </div>
+
+        <div class="cal-cell1 ng-scope cal-day-weekend cal-day-past" data-ng-repeat="day in days">
+            <span class="ng-binding">{{day.name}}</span>
+            <br>
+            <small>
+                <span class="pointer ng-binding">{{day.date}}</span>
+            </small>
+            <br>
+
+            <input data-ng-repeat="choice in vm.choices" ng-model="vm.timesheet.hours[day.name][$index]" ng-value="0">
+        </div>
+    </div>
+</div>

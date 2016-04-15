@@ -3,7 +3,8 @@
 
     angular
         .module('app.timesheet')
-        .controller('TimesheetController', TimesheetController);
+        .controller('TimesheetController', TimesheetController)
+        .directive('intelliCal', IntelliCal);
 
     TimesheetController.$inject = ['logger',
         '$stateParams',
@@ -21,35 +22,14 @@
         alert) {
 
         var vm = this;
+
+
+        vm.timesheets = [];
+        vm.timesheet = {
+        };
         //These variables MUST be set as a minimum for the calendar to work
         vm.calendarView = 'week';
         vm.viewDate = new Date();
-        // vm.events = [
-        //     {
-        //         title: 'An event',
-        //         type: 'warning',
-        //         startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-        //         endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-        //         editable: true,
-        //         draggable: true,
-        //         resizable: true
-        //     }, {
-        //         title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
-        //         type: 'info',
-        //         startsAt: moment().subtract(1, 'day').toDate(),
-        //         endsAt: moment().add(5, 'days').toDate(),
-        //         draggable: true,
-        //         resizable: true
-        //     }, {
-        //         title: 'This is a really long event title that occurs on every year',
-        //         type: 'important',
-        //         startsAt: moment().startOf('day').add(7, 'hours').toDate(),
-        //         endsAt: moment().startOf('day').add(19, 'hours').toDate(),
-        //         recursOn: 'year',
-        //         draggable: true,
-        //         resizable: true
-        //     }
-        // ];
 
         vm.isCellOpen = true;
 
@@ -85,24 +65,64 @@
         };
 
         vm.choices = [{id: 'choice1'}];
-
         vm.addNewChoice = function() {
             var newItemNo = vm.choices.length+1;
-            vm.choices.push({'id':'choice'+newItemNo});
+            vm.timesheets.push(vm.timesheet);
+            console.log(vm.timesheets);
+            vm.choices.push({'id': newItemNo});
         };
 
         vm.removeChoice = function() {
             var lastItem = vm.choices.length-1;
             vm.choices.splice(lastItem);
         };
-        
+
         vm.submitTime = function() {
-            Timesheet.save(function(response) {
-                logger.success('Budget created');
-                $location.path('timesheets/' + response.id);
-            }, function(errorResponse) {
-                vm.error = errorResponse.data.summary;
+
+            console.log(vm.timesheets);
+
+            var timesheet = {};
+            var weekdays = [
+                "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Saturday", "Sunday"
+            ];
+
+            var request = [];
+
+            vm.timesheets.forEach(function(e, i) {
+                timesheet.activities = e.activity[i];
+                timesheet.hours = e.hours[weekdays[i]][i];
+                timesheet.projects = e.project[i];
+                timesheet.day = weekdays[i];
+                timesheet.appUsers = vm.timesheet.user1;
+                timesheet.weekNumber = moment().isoWeek();
+                // YUCK! do something about this...
+                timesheet.date = moment().day(timesheet.day).week(parseInt(timesheet.weekNumber))._d;
+                // make method to determind fiscalWeekNumber so it doesn't exceed 52
+                timesheet.fiscalWeekNumber = (timesheet.weekNumber - 13);
+
+
+                request.push(timesheet);
+
             });
+
+
+            request.forEach(function() {
+                Timesheet.save(timesheet, function() {
+                    console.log('data has been saved', timesheet);
+                })
+            });
+            //console.log(timesheet);
+
+
+
+
+            // Timesheet.save(function(response) {
+            //     logger.success('Budget created');
+            //     $location.path('timesheets/' + response.id);
+            // }, function(errorResponse) {
+            //     vm.error = errorResponse.data.summary;
+            // });
         };
 
         // obiously ADJUST these below because we don't want themr unning every time
@@ -115,6 +135,10 @@
                 })
             })
         }());
+
+
+        //console.log(vm.dayLabel);
+
 
         // populates the activities drop down
         vm.activities = [];
@@ -136,6 +160,33 @@
             });
         }());
 
+        console.log(vm.choices)
     }
+
+    function IntelliCal() {
+        return {
+            restrict: 'E',
+            templateUrl: 'app/timesheets/directives/intelli-cal.html',
+            controller: function(moment, $scope) {
+                var weekdays = [
+                    "Monday", "Tuesday", "Wednesday", "Thursday",
+                    "Friday", "Saturday", "Sunday"
+                ];
+
+                $scope.days = [];
+                weekdays.forEach(function(day, number) {
+                    var name = day;
+                    var date = moment().day(day).format("MMMM, D");
+                    $scope.days.push({date: date, name: name});
+                });
+
+                console.log(moment().day("Monday").format("MMMM D"))
+            },
+            link: function(scope, element, attributes) {
+                console.log(scope.days)
+            }
+        };
+    }
+
 
 })();

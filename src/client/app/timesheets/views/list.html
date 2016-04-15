@@ -34,6 +34,16 @@
                                 increment="vm.calendarView">
                                 Next
                             </button>
+
+                            <div class="col-xs-1">
+                                <select ng-model="vm.timesheet.user1">
+                                    <option
+                                        data-ng-repeat="user in vm.users"
+                                        value="{{user.id}}">
+                                        {{user.fullName}}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -49,126 +59,66 @@
 
 
 
-
-                <script>
-//                                    $(function() {
-//                                        var projectCell = document.createElement('div');
-//                                        projectCell.className = 'cal-cell1 ng-scope cal-day-weekdend cal-day-future';
-//                                        var projectSpan = document.createElement('span');
-//                                        projectSpan.className = 'ng-binding';
-//                                        projectSpan.innerHTML = 'Project';
-//                                        projectCell.appendChild(projectSpan);
-//
-//                                        var taskCell = document.createElement('div');
-//                                        taskCell.className = 'cal-cell1 ng-scope cal-day-weekdend cal-day-future';
-//                                        var taskSpan = document.createElement('span');
-//                                        taskSpan.className = 'ng-binding';
-//                                        taskSpan.innerHTML = 'Task';
-//                                        taskCell.appendChild(taskSpan);
-//
-//                                        //document.getElementsByClassName('cal-week-box')[0].appendChild(taskCell);
-//                                        //document.getElementsByClassName('cal-week-box')[0].appendChild(projectCell);
-//
-//                                        console.log('test')
-//                                    })
-                </script>
-
                 <div class="row">
-                    <mwl-calendar
-                        events="vm.events"
-                        view="vm.calendarView"
-                        view-title="vm.calendarTitle"
-                        view-date="vm.viewDate"
-                        on-event-click="vm.eventClicked(calendarEvent)"
-                        on-event-times-changed="vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
-                        edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
-                        delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
-                        on-edit-event-click="vm.eventEdited(calendarEvent)"
-                        on-delete-event-click="vm.eventDeleted(calendarEvent)"
-                        cell-is-open="vm.isCellOpen"
-                        day-view-start="06:00"
-                        day-view-end="22:00"
-                        day-view-split="30"
-                        cell-modifier="vm.modifyCell(calendarCell)">
-                    </mwl-calendar>
-                    <fieldset  data-ng-repeat="choice in vm.choices">
 
 
-                        <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
-                        <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
-                        <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
-                        <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
-                        <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
-                        <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
-                        <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
-                        <!--<input type="text" ng-model="choice.name" name="" placeholder="Task">-->
-
-                        <div class="col-xs-1">
-                            <input class="form-control" type="text">
-                        </div>
-
-                        <div class="col-xs-1">
-                            <input class="form-control" id="ex3" type="text">
-                        </div>
+                    <intelli-cal></intelli-cal>
 
 
-                        <div class="col-xs-1">
-                            <input class="form-control" type="text">
-                        </div>
-
-                        <div class="col-xs-1">
-                            <input class="form-control" id="ex3" type="text">
-                        </div>
-
-                        <div class="col-xs-1">
-                            <input class="form-control" id="ex1" type="text">
-                        </div>
-
-                        <div class="col-xs-1">
-                            <input class="form-control" id="ex2" type="text">
-                        </div>
-
-                        <div class="col-xs-1">
-                            <input class="form-control" id="ex3" type="text">
-                        </div>
-
-                        <div class="col-xs-1">
-                            <select>
-                                <option
-                                    data-ng-repeat="project in vm.projects"
-                                    value="{{project.id}}">
-                                    {{project.name}}
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="col-xs-1">
-                            <select>
-                                <option
-                                    data-ng-repeat="activity in vm.activities"
-                                    value="{{activity.id}}">
-                                    {{activity.activityName}}
-                                </option>
-                            </select>
-                        </div>
-
-                        <div class="col-xs-1">
-                            <select>
-                                <option
-                                    data-ng-repeat="user in vm.users"
-                                    value="{{user.id}}">
-                                    {{user.fullName}}
-                                </option>
-                            </select>
-                        </div>
 
 
-                        <!--<button class="remove" ng-show="$last" ng-click="vm.removeChoice()">-</button>-->
-                        <!--</fieldset>-->
-                        <!--<button class="addfields">Add fields</button>-->
 
-                        <!--<div id="choicesDisplay">-->
-                        <!--{{ choices }}-->
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!--<fieldset  data-ng-repeat="choice in vm.choices">-->
+
+
+                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
+
+                        <!--<div class="col-xs-1">-->
+                            <!--<input class="form-control" type="text">-->
+                        <!--</div>-->
+
+                        <!--<div class="col-xs-1">-->
+                            <!--<input class="form-control" ng-model="vm.choices.id" type="text">-->
+                        <!--</div>-->
+
+
+                        <!--<div class="col-xs-1">-->
+                            <!--<input class="form-control" ng-model="vm.choices.id" type="text">-->
+                        <!--</div>-->
+
+                        <!--<div class="col-xs-1">-->
+                            <!--<input class="form-control" ng-model="vm.choices.id" id="ex3" type="text">-->
+                        <!--</div>-->
+
+                        <!--<div class="col-xs-1">-->
+                            <!--<input class="form-control" ng-model="vm.choices.id" id="ex1" type="text" >-->
+                        <!--</div>-->
+
+                        <!--<div class="col-xs-1">-->
+                            <!--<input class="form-control" ng-model="vm.choices.id" id="ex2" type="text">-->
+                        <!--</div>-->
+
+                        <!--<div class="col-xs-1">-->
+                            <!--<input class="form-control" ng-model="vm.choices.id" id="ex3" type="text">-->
                         <!--</div>-->
 
 
@@ -176,9 +126,22 @@
 
 
 
+                        <!--&lt;!&ndash;<button class="remove" ng-show="$last" ng-click="vm.removeChoice()">-</button>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</fieldset>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<button class="addfields">Add fields</button>&ndash;&gt;-->
+
+                        <!--&lt;!&ndash;<div id="choicesDisplay">&ndash;&gt;-->
+                        <!--&lt;!&ndash;{{ choices }}&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
 
 
-                    </fieldset>
+
+
+
+
+
+
+                    <!--</fieldset>-->
 
 
 

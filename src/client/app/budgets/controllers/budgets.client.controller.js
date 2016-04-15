@@ -32,8 +32,10 @@
             // Create new Budget object
             var budget = new Budget(vm.budget);
 
+            console.log(vm.budget);
             // Redirect after save
-            Budget.save(function(response) {
+            budget.$save(function(response) {
+                console.log(response);
                 logger.success('Budget created');
                 $location.path('budgets/' + response.id);
             }, function(errorResponse) {
@@ -98,11 +100,14 @@
             });
         };
 
-        vm.budgets = []
+        vm.budgets = [];
         vm.getBudgets = function() {
-            Budget.query(function(budget) {
-                vm.budgets.push(budget)
-            })
+            return Budget.query(function(budget) {
+                angular.forEach(budget, function(p) {
+                    vm.budgets.push(p)
+                    console.log(p)
+                })
+            });
         };
 
         activate();

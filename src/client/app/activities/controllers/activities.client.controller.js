@@ -83,7 +83,7 @@
         };
 
         vm.activities = [];
-        (function() {
+        vm.getActivities = function() {
             //var projects = new Project();
 
             Activity.query(function(project) {
@@ -91,7 +91,7 @@
                     vm.activities.push(p);
                 })
             })
-        }());
+        };
 
         activate();
 

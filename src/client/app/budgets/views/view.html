@@ -7,8 +7,40 @@
     <div class="panel-body">
 
       <form novalidate>
-        <formly-form model="vm.budget" fields="vm.formFields">
-        </formly-form>
+          <div class="col-xs-12">
+              <label class="control-label">Hours Allocated: </label>
+              <input class="form-control" id="ex3" type="text" ng-model="vm.budget.hours">
+          </div>
+
+          <div class="col-xs-12">
+              <label class="control-label">Fiscal Year: </label>
+              <select ng-model="vm.budget.fiscalYear" class="form-control">
+                  <option value="2015">2015</option>
+                  <option value="2016">2016</option>
+              </select>
+          </div>
+
+          <div class="col-xs-12">
+              <label class="control-label">Project Name: </label>
+              <select class="form-control" ng-model="vm.budget.project">
+                  <option
+                      data-ng-repeat="project in vm.projects"
+                      value="{{vm.budget.project.id}}">
+                      {{vm.budget.project.name}}
+                  </option>
+              </select>
+          </div>
+
+          <div class="col-xs-12">
+              <label class="control-label">Employee: </label>
+              <select ng-model="vm.budget.appUser" class="form-control">
+                  <option
+                      data-ng-repeat="user in vm.users"
+                      value="{{user.id}}">
+                      {{user.fullName}}
+                  </option>
+              </select>
+          </div>
       </form>
 
       <hr/>

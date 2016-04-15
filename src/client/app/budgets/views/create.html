@@ -1,4 +1,4 @@
-<section class="mainbar" data-ng-init="vm.initBudget()">
+<section class="mainbar" data-ng-init="vm.initBudget();">
 
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -23,7 +23,7 @@
 
           <div class="col-xs-12">
               <label class="control-label">Project Name: </label>
-              <select class="form-control">
+              <select class="form-control" ng-model="vm.budget.project">
                   <option
                       data-ng-repeat="project in vm.projects"
                       value="{{project.id}}">
@@ -34,7 +34,7 @@
 
           <div class="col-xs-12">
               <label class="control-label">Employee: </label>
-              <select ng-model="vm.budget.user_id" class="form-control">
+              <select ng-model="vm.budget.appUser" class="form-control">
                   <option
                       data-ng-repeat="user in vm.users"
                       value="{{user.id}}">
