@@ -32,10 +32,8 @@
             // Create new Budget object
             var budget = new Budget(vm.budget);
 
-            console.log(vm.budget);
             // Redirect after save
             budget.$save(function(response) {
-                console.log(response);
                 logger.success('Budget created');
                 $location.path('budgets/' + response.id);
             }, function(errorResponse) {
@@ -45,12 +43,12 @@
 
         // Remove existing Budget
         vm.remove = function(budget) {
-
             if (budget) {
                 budget = Budget.get({budgetId:budget.id}, function() {
                     budget.$remove(function() {
                         logger.success('Budget deleted');
-                        vm.tableParams.reload();
+                        $location.path('/budgets');
+                        //vm.tableParams.reload();
                     });
                 });
             } else {
@@ -59,7 +57,6 @@
                     $location.path('/budgets');
                 });
             }
-
         };
 
         // Update existing Budget
@@ -104,8 +101,7 @@
         vm.getBudgets = function() {
             return Budget.query(function(budget) {
                 angular.forEach(budget, function(p) {
-                    vm.budgets.push(p)
-                    console.log(p)
+                    vm.budgets.push(p);
                 })
             });
         };

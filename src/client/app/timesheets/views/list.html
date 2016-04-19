@@ -9,33 +9,36 @@
                 <h2 class="text-center">{{ vm.calendarTitle }}</h2>
 
                 <div class="row">
-
                     <div class="col-md-6 text-center">
+
                         <div class="btn-group">
 
-                            <button
-                                class="btn btn-primary"
-                                mwl-date-modifier
-                                date="vm.viewDate"
-                                decrement="vm.calendarView">
-                                Previous
-                            </button>
-                            <button
-                                class="btn btn-default"
-                                mwl-date-modifier
-                                date="vm.viewDate"
-                                set-to-today>
-                                Today
-                            </button>
-                            <button
-                                class="btn btn-primary"
-                                mwl-date-modifier
-                                date="vm.viewDate"
-                                increment="vm.calendarView">
-                                Next
-                            </button>
+                            <!--<button-->
+                                <!--class="btn btn-primary"-->
+                                <!--mwl-date-modifier-->
+                                <!--date="vm.viewDate"-->
+                                <!--decrement="vm.calendarView">-->
+                                <!--Previous-->
+                            <!--</button>-->
+                            <!--<button-->
+                                <!--class="btn btn-default"-->
+                                <!--mwl-date-modifier-->
+                                <!--date="vm.viewDate"-->
+                                <!--set-to-today>-->
+                                <!--Today-->
+                            <!--</button>-->
+                            <!--<button-->
+                                <!--class="btn btn-primary"-->
+                                <!--mwl-date-modifier-->
+                                <!--date="vm.viewDate"-->
+                                <!--increment="vm.calendarView">-->
+                                <!--Next-->
+                            <!--</button>-->
 
                             <div class="col-xs-1">
+                                <label style="color: red">
+                                    Who Are You?
+                                </label>
                                 <select ng-model="vm.timesheet.user1">
                                     <option
                                         data-ng-repeat="user in vm.users"
@@ -45,6 +48,7 @@
                                 </select>
                             </div>
                         </div>
+
                     </div>
 
                     <br class="visible-xs visible-sm">
@@ -55,99 +59,12 @@
 
 
 
-                <br><br><br>
-
-
-
                 <div class="row">
-
 
                     <intelli-cal></intelli-cal>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!--<fieldset  data-ng-repeat="choice in vm.choices">-->
-
-
-                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" ng-model="choice.name" name="" placeholder="Task">&ndash;&gt;-->
-
-                        <!--<div class="col-xs-1">-->
-                            <!--<input class="form-control" type="text">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-xs-1">-->
-                            <!--<input class="form-control" ng-model="vm.choices.id" type="text">-->
-                        <!--</div>-->
-
-
-                        <!--<div class="col-xs-1">-->
-                            <!--<input class="form-control" ng-model="vm.choices.id" type="text">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-xs-1">-->
-                            <!--<input class="form-control" ng-model="vm.choices.id" id="ex3" type="text">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-xs-1">-->
-                            <!--<input class="form-control" ng-model="vm.choices.id" id="ex1" type="text" >-->
-                        <!--</div>-->
-
-                        <!--<div class="col-xs-1">-->
-                            <!--<input class="form-control" ng-model="vm.choices.id" id="ex2" type="text">-->
-                        <!--</div>-->
-
-                        <!--<div class="col-xs-1">-->
-                            <!--<input class="form-control" ng-model="vm.choices.id" id="ex3" type="text">-->
-                        <!--</div>-->
-
-
-
-
-
-
-                        <!--&lt;!&ndash;<button class="remove" ng-show="$last" ng-click="vm.removeChoice()">-</button>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</fieldset>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<button class="addfields">Add fields</button>&ndash;&gt;-->
-
-                        <!--&lt;!&ndash;<div id="choicesDisplay">&ndash;&gt;-->
-                        <!--&lt;!&ndash;{{ choices }}&ndash;&gt;-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-
-
-
-
-
-
-
-                    <!--</fieldset>-->
-
-
-
-
-
                 </div>
+
                 <div class="row">
 
                     <div class="col-lg-2">

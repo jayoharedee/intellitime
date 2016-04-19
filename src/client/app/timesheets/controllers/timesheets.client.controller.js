@@ -6,27 +6,21 @@
         .controller('TimesheetController', TimesheetController)
         .directive('intelliCal', IntelliCal);
 
-    TimesheetController.$inject = ['logger',
-        '$stateParams',
-        '$location',
+    TimesheetController.$inject = [
+        'logger',
         'Timesheet',
-        'TableSettings', 'Project', 'Activity', 'User',
-        'TimesheetForm'];
+         'Project', 'Activity', 'User', '$scope'
+    ];
     /* @ngInject */
     function TimesheetController(logger,
-        $stateParams,
-        $location,
         Timesheet,
-        TableSettings, Project, Activity, User,
-        TimesheetForm,
+        Project, Activity, User, $scope,
         alert) {
 
         var vm = this;
 
-
         vm.timesheets = [];
-        vm.timesheet = {
-        };
+        vm.timesheet = {};
         //These variables MUST be set as a minimum for the calendar to work
         vm.calendarView = 'week';
         vm.viewDate = new Date();
@@ -68,7 +62,6 @@
         vm.addNewChoice = function() {
             var newItemNo = vm.choices.length+1;
             vm.timesheets.push(vm.timesheet);
-            console.log(vm.timesheets);
             vm.choices.push({'id': newItemNo});
         };
 
@@ -79,50 +72,38 @@
 
         vm.submitTime = function() {
 
-            console.log(vm.timesheets);
+            var j = 0, request = [];
+            for(var day in vm.timesheet.hours) {
 
-            var timesheet = {};
-            var weekdays = [
-                "Monday", "Tuesday", "Wednesday", "Thursday",
-                "Friday", "Saturday", "Sunday"
-            ];
+                for(var date in vm.timesheet.hours[day]) {
+                    var hours = vm.timesheet.hours[day][date];
 
-            var request = [];
+                    for(var hour in hours) {
+                        var timesheet = {};
+                        timesheet.date = Object.keys(vm.timesheet.hours[day])[0];
+                        // fetches day of week through filter, must find better solution
+                        var dayOfWeek = $scope.days.filter(function(day) {
+                            return day.date === timesheet.date
+                        })[0].name;
+                        timesheet.day = dayOfWeek;
+                        timesheet.activity = vm.timesheet.activity[j];
+                        timesheet.project = vm.timesheet.project[j++];
+                        timesheet.hours = hours[hour];
+                        timesheet.appUser = vm.timesheet.user1;
+                        timesheet.weekNumber = moment().isoWeek();
+                        timesheet.fiscalWeekNumber = (timesheet.weekNumber - 13);
+                        request.push(timesheet);
+                    }
+                }
+            }
 
-            vm.timesheets.forEach(function(e, i) {
-                timesheet.activities = e.activity[i];
-                timesheet.hours = e.hours[weekdays[i]][i];
-                timesheet.projects = e.project[i];
-                timesheet.day = weekdays[i];
-                timesheet.appUsers = vm.timesheet.user1;
-                timesheet.weekNumber = moment().isoWeek();
-                // YUCK! do something about this...
-                timesheet.date = moment().day(timesheet.day).week(parseInt(timesheet.weekNumber))._d;
-                // make method to determind fiscalWeekNumber so it doesn't exceed 52
-                timesheet.fiscalWeekNumber = (timesheet.weekNumber - 13);
-
-
-                request.push(timesheet);
-
-            });
-
-
-            request.forEach(function() {
-                Timesheet.save(timesheet, function() {
-                    console.log('data has been saved', timesheet);
+            request.forEach(function(item) {
+                Timesheet.save(item, function() {
+                    logger.success(item.day +', ' + item.date, 'has been saved.');
+                }, function(response) {
+                    logger.error(response.data.message);
                 })
             });
-            //console.log(timesheet);
-
-
-
-
-            // Timesheet.save(function(response) {
-            //     logger.success('Budget created');
-            //     $location.path('timesheets/' + response.id);
-            // }, function(errorResponse) {
-            //     vm.error = errorResponse.data.summary;
-            // });
         };
 
         // obiously ADJUST these below because we don't want themr unning every time
@@ -160,7 +141,6 @@
             });
         }());
 
-        console.log(vm.choices)
     }
 
     function IntelliCal() {
@@ -176,17 +156,20 @@
                 $scope.days = [];
                 weekdays.forEach(function(day, number) {
                     var name = day;
-                    var date = moment().day(day).format("MMMM, D");
+                    var date = moment().startOf('isoweek').day(day).format("MMMM, D");
+
+
+                    if (day === "Sunday"){
+                        date = date.split(' ');
+                        date = date[0] + ' ' + (parseInt(date[1]) + 7);
+                    }
+
                     $scope.days.push({date: date, name: name});
                 });
-
-                console.log(moment().day("Monday").format("MMMM D"))
             },
             link: function(scope, element, attributes) {
-                console.log(scope.days)
             }
         };
     }
-
 
 })();

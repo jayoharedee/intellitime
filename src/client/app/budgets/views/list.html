@@ -1,4 +1,4 @@
-<section class="mainbar" data-ng-init="vm.getBudgets()">
+<section class="mainbar" data-ng-init="vm.getBudgets(); vm.initBudget()">
 
   <div class="panel panel-primary">
     <div class="panel-heading">
@@ -6,13 +6,25 @@
     </div>
     <div class="panel-body">
 
-      <div class="pull-right">
-        <a type="button" class="btn btn-success" href="/budgets/create">
-          <i class="glyphicon glyphicon-open"></i> New Budget
-        </a>
-      </div>
+        <div class="pull-right">
+            <a type="button" class="btn btn-success" href="/budgets/create">
+                <i class="glyphicon glyphicon-open"></i> New Budget
+            </a>
+        </div>
 
-      <table show-filter="true" class="table table-condensed table-striped">
+
+        <br>
+
+      <table class="table table-condensed table-striped">
+          <tr>
+              <th>Hours</th>
+              <th>Fiscal Year</th>
+              <th>Project Mame</th>
+              <th>User</th>
+              <th>View</th>
+              <th>Edit</th>
+              <th>Delete</th>
+          </tr>
           <tr ng-repeat="budget in vm.budgets">
               <td data-title="'Hours'" sortable="'hours'" filter="{ 'hours': 'text' }">{{budget.hours}}</td>
               <td data-title="'Fiscal Year'" sortable="'fiscalYear'" filter="{'fiscalYear': 'text'}">
@@ -20,18 +32,26 @@
               </td>
               <td data-title="'Hours'" sortable="'hours'" filter="{ 'hours': 'text' }">{{budget.project.name}}</td>
               <td data-title="'Fiscal Year'" sortable="'fiscalYear'" filter="{'fiscalYear': 'text'}">
-                  {{budget.user}}
+                  {{vm.users[$index].fullName}}
+              </td>
+              <td>
+                  <div class="table-actions">
+                      <a class="btn btn-default" title="View" href="/budgets/{{budget.id}}">
+                          <span class="glyphicon glyphicon-eye-open"></span>
+                      </a>
+                  </div>
               </td>
               <td>
                  <div class="table-actions">
-                      <a class="btn btn-default" title="View" href="/budgets/{{budget.id}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                      </a>
-                      <a class="btn btn-default" title="Edit" href="/budgets/{{budget.id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                      </a>
+                     <a class="btn btn-default" title="Edit" href="/budgets/{{budget.id}}/edit">
+                         <span class="glyphicon glyphicon-edit"></span>
+                     </a>
+                 </div>
+              </td>
+              <td>
+                  <div class="table-actions">
                       <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="vm.remove(budget)" item="budget">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
+                          <span class="glyphicon glyphicon-remove-circle"></span>
                       </a>
                   </div>
               </td>

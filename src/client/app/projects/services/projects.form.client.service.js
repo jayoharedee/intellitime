@@ -33,7 +33,6 @@
                     templateOptions: {
                         label: 'Lead:',
                         disabled: disabled,
-                        required: true
                     }
                 },
                 {

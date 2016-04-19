@@ -44,7 +44,7 @@
             </small>
             <br>
 
-            <input data-ng-repeat="choice in vm.choices" ng-model="vm.timesheet.hours[day.name][$index]" ng-value="0">
+            <input data-ng-repeat="choice in vm.choices" ng-model="vm.timesheet.hours[day.name][day.date][$index]" ng-value="0">
         </div>
     </div>
 </div>

@@ -45,6 +45,7 @@
         vm.getProjects = function() {
             return Project.query(function(project) {
                angular.forEach(project, function(p) {
+                   console.log(p)
                   vm.projects.push(p)
                })
             });
